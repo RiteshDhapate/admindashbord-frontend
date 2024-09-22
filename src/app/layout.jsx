@@ -1,5 +1,8 @@
 import localFont from "next/font/local";
 import "./globals.css";
+import SideBar from "./components/SideBar";
+import MyProvider from "./context/SideBar";
+import { Toaster } from "react-hot-toast";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -21,9 +24,15 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} bg-[#79a6ff27] antialiased`}
       >
-        {children}
+        <Toaster/>
+        <MyProvider>
+          <div className="w-screen flex p-2 relative">
+            <SideBar />
+            <div className="w-full md:pl-[255px]">{children}</div>
+          </div>
+        </MyProvider>
       </body>
     </html>
   );
